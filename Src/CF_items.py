@@ -2,7 +2,7 @@
 implementation:
 simple collaborative fliter based on items
 """
-import numpy as np
+
 import math
 
 def read_musicfile(filename):
@@ -54,7 +54,7 @@ def transinfo_user2music(infos):
     return infost
 
 """
-infos_mat = 
+infost_mat = 
 {
     (key=1(music_id):value={(key=3(user_id):value=2(score)),......}),
     ...,
@@ -101,18 +101,13 @@ def get_norms(infos):
         norm_table[id] = get_norm(infos,id)
 
 def get_sims(infos):
-    cnt = 0
     for id1 in infos.keys():
         for id2 in infos.keys():
-            
             if norm_table[id1] == 0.0 or norm_table[id2] == 0.0:
                 sim_table[encode(id1,id2)] = 0.0
             else:
                 sim_table[encode(id1,id2)] = get_inner_product(infos,id1,id2) * 1.0 / (norm_table[id1] * norm_table[id2])
             
-            '''
-            sim_table[encode(id1,id2)] = 0.01
-            '''
 def save_sims_table(filename):
     
     with open(filename,"w")as fs:
